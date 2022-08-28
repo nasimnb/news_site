@@ -10,7 +10,7 @@
 	<div class="col-lg-8">
 		<div class="all-blog-posts">
 			<div class="row">
-				{% for article in articles %}
+				{% for article in category.articles.all %}
 					<div class="col-lg-6">
 						<div class="blog-post">
 							<div class="blog-thumb">
@@ -28,7 +28,7 @@
 									<li><a href="#">{{article.jpublish}}</a></li>
 									<li><a href="#">12 Comments</a></li>
 								</ul>
-								{% for cat in article.category_publish.all %}
+								{% for cat in article.category.all %}
 									<span><a href="">#{{cat.title}}</a></span>
 								{% endfor %}
 
