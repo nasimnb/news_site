@@ -1,34 +1,35 @@
 from django.shortcuts import render,get_object_or_404
 from .models import Article,Category
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-
-def Home(request):
-	article_list=Article.objects.published()
-	page = request.GET.get('page',1)
-
-	paginator = Paginator(article_list,2)
-	try:
-		article = paginator.page(page)
-	except PageNotAnInteger:
-		article = paginator.page(1)
-	except EmptyPage:
-		article = paginator.page(paginator.num_pages)
-
-	context={
-	"articles":article,
-	}
-	return render(request,'blog/home.html',context)
+from django.views.generic import ListView,DetailView
 
 
-def detail(request,slug):
-	context={
-	"article":get_object_or_404(Article.objects.published(),slug=slug)
-	}
-	return render(request,'blog/detail.html',context)
 
-def category(request,slug):
-	context={
-	"category":get_object_or_404(Category,slug=slug,status=True)
-	}
-	return render(request,'blog/category.html',context)	
+class ArticleList(ListView):
+	queryset=Article.objects.published()
+	paginate_by=2
+
+
+class ArticleDetail(DetailView):
+
+	def get_object(self):
+		slug=self.kwargs.get('slug')
+		return get_object_or_404(Article.objects.published(),slug=slug)
+
+class Categorylist(ListView):
+	paginate_by=2
+	template_name='blog/category_list.html'
+
+	def get_queryset(self):
+		global category
+		slug=self.kwargs.get('slug')
+		category=get_object_or_404(Category.objects.active(),slug=slug)
+		return category.articles.published()
+
+	def get_context_data(self, **kwargs):
+		context = super().get_context_data(**kwargs)
+		context['category'] = category
+		return context
+
+
 
