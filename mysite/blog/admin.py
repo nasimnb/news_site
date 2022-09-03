@@ -24,11 +24,11 @@ def make_draft(self, request, queryset):
 	) % updated, messages.SUCCESS)
 
 
-	
+
 #-------Admin class------- 
 
 class ArticleAdmin(admin.ModelAdmin):
-	list_display=('title','slug','jpublish','category_to_str','status')
+	list_display=('title','thumbnail_tag','slug','jpublish','category_to_str','status')
 	list_filter=('publish','status')
 	prepopulated_fields={'slug':('title',)}
 	ordering=['status','publish']
@@ -44,9 +44,5 @@ class CategoryAdmin(admin.ModelAdmin):
 	list_display=('position','title','slug','status')
 	list_filter=(['status'])
 	prepopulated_fields={'slug':('title',)}
-
-
-
-
 
 admin.site.register(Category,CategoryAdmin)

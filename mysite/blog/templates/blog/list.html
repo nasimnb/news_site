@@ -1,0 +1,70 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+
+{% block title %}
+	| خانه
+{% endblock %}
+
+{% block main %}
+
+	<div class="col-lg-8">
+		<div class="all-blog-posts">
+			{% block header %}{% endblock %}
+			<div class="row">
+				{% for article in object_list %}
+					<div class="col-lg-6">
+						<div class="blog-post">
+							<div class="blog-thumb">
+								<img src="{{article.thumbnail.url}}" width="300px" height="200px" alt="{{article.slug}}">
+							</div>
+							<div class="down-content">
+								
+								<a target="_blank" href="{% url 'blog:detail' article.slug %}">
+									<h4>{{article.title}}</h4>
+
+									<p>{{article.description|truncatewords:30}}</p>
+								</a>
+								<ul class="post-info">
+									<li><a href="#">Admin</a></li>
+									<li><a href="#">{{article.jpublish}}</a></li>
+									<li><a href="#">12 Comments</a></li>
+								</ul>
+								{% for cat in article.category.all %}
+									<span><a href="">#{{cat.title}}</a></span>
+								{% endfor %}
+
+
+							</div>
+						</div>
+					</div>
+				{% endfor %}
+			{% if is_paginated %}
+				<div class="col-lg-12">
+				{% if page_obj.has_other_pages %}
+					<ul class="page-numbers">
+						{% if page_obj.has_previous %}
+							<li><a  href="{% block previous_page_url %}{% endblock %}"><i class="fa fa-angle-double-right"></i></a></li>
+						{% else %}
+							<li class="disabled"><i class="fa fa-angle-double-right"></i></li>
+						{% endif %}
+						{% for i in page_obj.paginator.page_range %}
+							{% if page_obj.number == i %}
+								<li class="active"><a href="{% block content1 %}{% endblock %}">{{i}}</a></li>
+							{% else %}
+								<li><a href="{% block content2 %}{% endblock %}">{{ i }}</a></li>
+							{% endif %}
+						{% endfor %}
+						{% if page_obj.has_next %}
+							<li><a href="{% block next_page_url %}{% endblock %}"><i class="fa fa-angle-double-left"></i></a></li>
+						{% else %}
+							<li class="disabled"><i class="fa fa-angle-double-left"></i></li>
+						{% endif %}
+					</ul>
+				{% endif %}
+				</div>
+			{% endif %}	
+			</div>
+		</div>
+	</div>
+
+{% endblock %}

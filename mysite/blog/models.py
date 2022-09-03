@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from extensions.utils import jalali_converter
-
+from django.utils.html import format_html
 
 class ArticleManager(models.Manager):
 	def published(self):
@@ -58,8 +58,8 @@ class Article(models.Model):
 		return jalali_converter(self.publish)
 	jpublish.short_description='زمان انتشار'
 
-	def category_publish(self):
-		return self.category.filter(status=True)
-
 	objects=ArticleManager()
 
+	def thumbnail_tag(self):
+		return format_html("<img src='{}' width='100px' height='75px' style='border-radius: 3px' >".format(self.thumbnail.url))
+	thumbnail_tag.short_description="تصویر بندانگشتی"
