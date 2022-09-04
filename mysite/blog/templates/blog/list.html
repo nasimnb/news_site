@@ -25,9 +25,13 @@
 									<p>{{article.description|truncatewords:30}}</p>
 								</a>
 								<ul class="post-info">
-									<li><a href="#">Admin</a></li>
+									<li>
+										<a href="{% url 'blog:author' article.author %}">
+											نویسنده :{{article.author.get_full_name}}
+										</a>
+									</li>
 									<li><a href="#">{{article.jpublish}}</a></li>
-									<li><a href="#">12 Comments</a></li>
+									
 								</ul>
 								{% for cat in article.category.all %}
 									<span><a href="">#{{cat.title}}</a></span>
