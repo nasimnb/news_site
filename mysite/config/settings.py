@@ -27,6 +27,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+LOGIN_REDIRECT_URL="account:home"
+LOGIN_URL='account:login'
+
 
 # Application definition
 
@@ -38,6 +41,7 @@ INSTALLED_APPS = [
 	'django.contrib.messages',
 	'django.contrib.staticfiles',
 	'blog.apps.BlogConfig',
+	'account.apps.AccountConfig',
 	'extensions'
 ]
 
@@ -56,7 +60,7 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
 	{
 		'BACKEND': 'django.template.backends.django.DjangoTemplates',
-		'DIRS': ['templates'],
+		'DIRS': [BASE_DIR / 'templates'],
 		'APP_DIRS': True,
 		'OPTIONS': {
 			'context_processors': [
@@ -129,5 +133,8 @@ MEDIA_URL='media/'
 MEDIA_ROOT=BASE_DIR/'media'
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
+
+
+
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
