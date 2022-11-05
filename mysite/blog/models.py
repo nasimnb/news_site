@@ -3,7 +3,7 @@ from django.utils import timezone
 from extensions.utils import jalali_converter
 from django.utils.html import format_html
 from django.contrib.auth.models import User
-
+from django.urls import reverse
 
 class ArticleManager(models.Manager):
 	def published(self):
@@ -70,3 +70,6 @@ class Article(models.Model):
 	def category_to_str(self):
 		return "، ".join([category.title for category in self.category.active()])
 	category_to_str.short_description="دسته بندی"
+
+	def get_absolute_url(self):
+		return reverse("account:home")
