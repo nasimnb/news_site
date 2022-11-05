@@ -7,6 +7,10 @@ from django.views.generic import ListView
 
 
 class ArticleList(LoginRequiredMixin,ListView):
-	queryset=Article.objects.all()
+	def get_queryset(self):
+		if self.request.user.is_superuser:
+			return	Article.objects.all()
+		else:
+			return	Article.objects.filter(author=self.request.user)
 	template_name="registration/home.html"
 
