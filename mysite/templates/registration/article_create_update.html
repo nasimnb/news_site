@@ -21,8 +21,10 @@
 					<div class="col-12">{{form.description|as_crispy_field}}</div>
 					<div class="col-6">{{form.thumbnail|as_crispy_field}}</div>
 					<div class="col-6">{{form.publish|as_crispy_field}}</div>
-					<div class="col-6">{{form.author|as_crispy_field}}</div>
-					<div class="col-6">{{form.status|as_crispy_field}}</div>
+					{% if user.is_superuser %}   
+						<div class="col-6">{{form.author|as_crispy_field}}</div>
+						<div class="col-6">{{form.status|as_crispy_field}}</div>
+					{% endif %}	
 				</div>
 				<button class="btn btn-success">ارسال</button>
 			</form>
