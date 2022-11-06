@@ -44,7 +44,10 @@ INSTALLED_APPS = [
 	'account.apps.AccountConfig',
 	'extensions',
 	'widget_tweaks',
+	'crispy_forms',
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
 MIDDLEWARE = [
 	'django.middleware.security.SecurityMiddleware',
