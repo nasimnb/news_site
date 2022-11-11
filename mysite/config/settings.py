@@ -29,7 +29,7 @@ ALLOWED_HOSTS = []
 
 LOGIN_REDIRECT_URL="account:home"
 LOGIN_URL='account:login'
-
+LOGOUT_REDIRECT_URL='account:login'
 
 # Application definition
 

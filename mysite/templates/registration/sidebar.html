@@ -1,6 +1,7 @@
 {% load static %}
-
+{% load base_tags %}
 	<!-- Main Sidebar Container -->
+
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
 	<!-- Brand Logo -->
 	<a href="index3.html" class="brand-link">
@@ -33,18 +34,14 @@
 						<i class="right fas fa-angle-left"></i>
 					</p>
 				</a>
-				<ul class="nav nav-treeview" style="display: none;">
+				<ul class="nav nav-treeview" style="display: block;">
 					<li class="nav-item">
-						<a href="{% url 'account:home' %}" class="nav-link active">
-							<i class="fa fa-list nav-icon"></i>
-							<p>لیست مقالات</p>
-						</a>
+
+						{% link request 'home' 'لیست مقالات   ' 'fa-list' %}
 					</li>
 					<li class="nav-item">
-						<a href="{% url 'account:article_create' %}" class="nav-link">
-							<i class="fa fa-edit nav-icon"></i>
-							<p>افزودن مقالات</p>
-						</a>
+
+						{% link request 'article_create' 'افزودن مقالات  ' 'fa-edit' %}
 					</li>
 				</ul>
 			</li>

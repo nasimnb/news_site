@@ -48,6 +48,7 @@
       <li class="nav-item d-none d-sm-inline-block">
         <a href="{% url 'blog:home' %}" class="nav-link">نمایش سایت</a>
       </li> 
+
     </ul>
 
     <!-- SEARCH FORM -->
@@ -55,7 +56,9 @@
     <!-- Right navbar links -->
     <ul class="navbar-nav mr-auto-navbav">
       <li class="nav-item">
-
+        <a class="nav-link"  data-slide="true" href="{% url 'account:logout' %}">
+          <i class="fa fa-sign-out-alt"></i> 
+        </a>
       </li>
     </ul>
   </nav>
@@ -125,7 +128,8 @@
 <!-- Tempusdominus Bootstrap 4 -->
 <script src="{% static  'registration/adminlte/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js' %}"></script>
 <!-- Summernote -->
-<script src={% static  'registration/adminlte/plugins/summernote/summernote-bs4.min.js' %}"></script>
+<script src="{% static  'registration/adminlte/plugins/summernote/summernote-bs4.min.js' %}">
+</script>
 <!-- overlayScrollbars -->
 <script src="{% static  'registration/adminlte/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js' %}"></script>
 <!-- AdminLTE App -->
