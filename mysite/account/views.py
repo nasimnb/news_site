@@ -10,7 +10,7 @@ from django.views.generic import (
 	DeleteView
 	)
 from .mixins import (
-	Fieldmixins,
+	FieldsMixin,
 	FormValidMixin,
 	AuthorAccessMixin,
 	SuperUserAccessMixin
@@ -25,13 +25,13 @@ class ArticleList(LoginRequiredMixin,ListView):
 			return	Article.objects.filter(author=self.request.user)
 	template_name="registration/home.html"
 
-class ArticleCreate(LoginRequiredMixin,Fieldmixins,FormValidMixin,CreateView):
+class ArticleCreate(FieldsMixin,FormValidMixin,CreateView):
 	model=Article
 	fields=["author","title","slug","category","description","thumbnail","publish","status"]
 	template_name="registration/article_create_update.html"
 
 
-class ArticleUpdate(AuthorAccessMixin,Fieldmixins,FormValidMixin,UpdateView):
+class ArticleUpdate(AuthorAccessMixin,FieldsMixin,FormValidMixin,UpdateView):
 	model=Article
 	template_name="registration/article_create_update.html"
 

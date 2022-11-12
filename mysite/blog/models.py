@@ -40,8 +40,10 @@ class Article(models.Model):
 		verbose_name_plural="مقالات"
 
 	STATUS_CHOICES=(
-		('d','پیش نویس'),
-		('p','منتشر شده')
+		('d','پیش نویس'), 		#draft
+		('p','منتشر شده'),		#publish
+		('i','در حال بررسی'),		#investigation
+		('b','برگشت داده شده'),	#back
 		)
 	author=models.ForeignKey(User,null=True,on_delete=models.SET_NULL,related_name='articles',verbose_name="نویسنده")
 	title=models.CharField(max_length=200,verbose_name="عنوان")

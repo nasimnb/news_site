@@ -26,10 +26,11 @@
 						<div class="col-6">{{form.status|as_crispy_field}}</div>
 					{% endif %}	
 				</div>
-				<button class="btn btn-success">ارسال</button>
+				
 				{% if user.is_superuser and request.resolver_match.kwargs.pk %}
 					<a class="btn btn-danger" href="{% url 'account:article_delete' 	request.resolver_match.kwargs.pk %}">حذف</a>
 				{% endif %}	
+				<button class="btn btn-success" type="submit">ارسال مقاله</button>
 			</form>
 		</div>
 	</div>

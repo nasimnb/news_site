@@ -3,14 +3,13 @@ from blog.models import Article
 from django.shortcuts import get_object_or_404
 
 
-
-class Fieldmixins():
+class FieldsMixin():
 	def dispatch(self, request, *args, **kwargs):
 		self.fields = [
-						"title","slug","category",
+						"author","title","slug","category",
 						"description","thumbnail","publish",
 						"is_special","status"
-					]
+			]
 		if request.user.is_superuser:
 			self.fields.append("author")
 
@@ -24,15 +23,16 @@ class FormValidMixin():
 		else:
 			self.obj=form.save(commit=False)
 			self.obj.author=self.request.user
-			self.obj.status='d'
-		return	super().form_valid(form) 
+			if not self.obj.status == 'i':
+				self.obj.status='d'
+		return super().form_valid(form)
 
 
 
 class AuthorAccessMixin():
 	def dispatch(self, request, pk , *args, **kwargs):
 		article=get_object_or_404(Article,pk=pk)
-		if article.author==request.user and article.status=='d' or\
+		if article.author==request.user and article.status in ['d','b'] or\
 		 request.user.is_superuser:
 			return super().dispatch(request, *args, **kwargs)
 		else:
