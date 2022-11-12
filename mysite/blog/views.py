@@ -3,7 +3,7 @@ from .models import Article,Category
 from account.models import User
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.generic import ListView,DetailView
-
+from account.mixins import AuthorAccessMixin
 
 
 class ArticleList(ListView):
@@ -48,3 +48,8 @@ class Authorlist(ListView):
 		context['author'] = author
 		return context
 
+
+class ArticlePreview(AuthorAccessMixin,DetailView):
+	def get_object(self):
+		pk=self.kwargs.get('pk')
+		return get_object_or_404(Article,pk=pk)
