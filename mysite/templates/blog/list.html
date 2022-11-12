@@ -21,7 +21,9 @@
 								
 								<a target="_blank" href="{% url 'blog:detail' article.slug %}">
 									<h4>{{article.title}}</h4>
-
+									{% if article.is_special %}
+										<span class="badge badge-danger" style="font-size: 14px">ویژه</span>
+									{% endif %}
 									<p>{{article.description|truncatewords:30|striptags}}</p>
 								</a>
 								<ul class="post-info">

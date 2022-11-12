@@ -5,13 +5,21 @@ from django.shortcuts import get_object_or_404
 
 class FieldsMixin():
 	def dispatch(self, request, *args, **kwargs):
-		self.fields = [
+		
+		if request.user.is_superuser:
+			self.fields = [
 						"author","title","slug","category",
 						"description","thumbnail","publish",
 						"is_special","status"
 			]
-		if request.user.is_superuser:
-			self.fields.append("author")
+		elif request.user.is_author:
+			self.fields = [
+						"title","slug","category",
+						"description","thumbnail","publish",
+						"is_special","status"
+			]
+		else:
+			raise Http404("You cann't see this page!")
 
 		return super().dispatch(request, *args, **kwargs)
 

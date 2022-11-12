@@ -18,10 +18,19 @@
 						</div>
 						<div class="down-content">
 							<a href="post-details.html"><h4>{{object.title}}</h4></a>
-							<ul class="post-info">
-								<li><a href="#">{{object.jpublish}}</a></li>
-							</ul>
-							<span class="text-justify">{{object.description|safe}}</span>
+							{% if object.is_special %}
+							 	{% if user.authenticated and user.is_special_user or user == object.author or user.is_superuser %}
+							 		<ul class="post-info">
+										<li><a href="#">{{object.jpublish}}</a></li>
+									</ul>
+									<span class="text-justify">{{object.description|safe}}</span>
+							 	{% else %}
+								 	<p class="post-subtitle text-justify">{{object.description|striptags|truncatewords:30|linebreaks}}
+								 	</p>
+
+							 	<p class="alert alert-warning" >این مقاله ویژه است و برای  مشاهده آن باید <a href="#">اشتراک ویژه </a>تهیه کنید.</p>
+							 	{% endif %}
+							{% endif %}
 							<div class="post-options">
 								<div class="row">
 									<div class="col-6">
