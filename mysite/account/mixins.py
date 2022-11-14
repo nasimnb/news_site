@@ -1,6 +1,6 @@
 from django.http import Http404
 from blog.models import Article
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404,redirect
 
 
 class FieldsMixin():
@@ -11,13 +11,13 @@ class FieldsMixin():
 						"author","title","slug","category",
 						"description","thumbnail","publish",
 						"is_special","status"
-			]
+							]
 		elif request.user.is_author:
 			self.fields = [
 						"title","slug","category",
 						"description","thumbnail","publish",
 						"is_special","status"
-			]
+							]
 		else:
 			raise Http404("You cann't see this page!")
 
@@ -37,6 +37,7 @@ class FormValidMixin():
 
 
 
+
 class AuthorAccessMixin():
 	def dispatch(self, request, pk , *args, **kwargs):
 		article=get_object_or_404(Article,pk=pk)
@@ -47,12 +48,23 @@ class AuthorAccessMixin():
 			raise Http404("You cann't see this page!")
 
 
+
 class SuperUserAccessMixin():
-	def dispatch(self, request, pk , *args, **kwargs):
-		
+	def dispatch(self, request, *args, **kwargs):
 		if request.user.is_superuser:
 			return super().dispatch(request, *args, **kwargs)
 		else:
-			raise Http404("You cann't see this page!")
+			raise Http404("You cann't see this page!")	
+
+class AuthorsAccessMixin():
+	def dispatch(self, request, *args, **kwargs):
+		if request.user.is_authenticated:
+			if request.user.is_superuser or request.user.is_author:
+				return super().dispatch(request, *args, **kwargs)
+			else:
+				return redirect('account:profile')
+		else:
+			return redirect('login')
+
 
 

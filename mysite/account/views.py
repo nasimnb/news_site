@@ -4,6 +4,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from blog.models import Article
 from django.urls import reverse_lazy
 from .models import User
+from .forms import ProfileForm
 from django.views.generic import (
 	ListView,
 	CreateView,
@@ -14,11 +15,12 @@ from .mixins import (
 	FieldsMixin,
 	FormValidMixin,
 	AuthorAccessMixin,
-	SuperUserAccessMixin
+	SuperUserAccessMixin,
+	AuthorsAccessMixin
 	)
 
 
-class ArticleList(LoginRequiredMixin,ListView):
+class ArticleList(AuthorsAccessMixin,ListView):
 	def get_queryset(self):
 		if self.request.user.is_superuser:
 			return	Article.objects.all()
@@ -26,9 +28,8 @@ class ArticleList(LoginRequiredMixin,ListView):
 			return	Article.objects.filter(author=self.request.user)
 	template_name="registration/home.html"
 
-class ArticleCreate(FieldsMixin,FormValidMixin,CreateView):
+class ArticleCreate(AuthorsAccessMixin,FieldsMixin,FormValidMixin,CreateView):
 	model=Article
-	fields=["author","title","slug","category","description","thumbnail","publish","status"]
 	template_name="registration/article_create_update.html"
 
 
@@ -43,11 +44,10 @@ class ArticleDelete(SuperUserAccessMixin,DeleteView):
 	template_name="registration/article_confirm_delete.html"
 
 
-class Profile(UpdateView):
+class Profile(LoginRequiredMixin,UpdateView):
 	model=User
 	template_name="registration/profile.html"
-	fields=['username','email','first_name','last_name','special_user','is_author']
+	form_class=ProfileForm
 	success_url=reverse_lazy("account:profile")
 	def get_object(self):
 		return User.objects.get(pk=self.request.user.pk)
-		
