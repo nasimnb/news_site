@@ -20,7 +20,7 @@
 
     <link rel="stylesheet" href="{% static 'registration/login/css/rtl.css' %}">
 
-    <title>{% block title_meta %}ورود به سایت{% endblock %}</title>
+    <title>{% block title_meta %}ثبت نام{% endblock %}</title>
   </head>
   <body>
   
@@ -44,7 +44,7 @@
           <div class="row justify-content-center">
             <div class="col-md-8">
               <div class="mb-4">
-              <h3>ورود به سایت  <strong>خبری</strong></h3>
+              <h3>ثبت نام</h3>
             </div>
             <form action="#" method="post">{% csrf_token %}
               <div class="form-group first">
@@ -61,14 +61,42 @@
                   {% endif %}
                 {% endif %}
               </div>
-              <div class="form-group last mb-4">
-                <label for="password">گذرواژه</label>
-                <!-- <input type="password" class="form-control" id="password"> -->
-                {{form.password|add_class:"form-control"}}
-                 {% if form.password %}
-                  {% if form.password.errors %}
+              <div class="form-group first">
+                <label for="email">ایمیل</label>
+                <!-- <input type="text" class="form-control" id="username"> -->
+                {{form.email|add_class:"form-control"}}
+                {% if form.email %}
+                  {% if form.email.errors %}
                     <div class="error">
-                      {% for error in  form.password.errors  %}
+                      {% for error in  form.email.errors  %}
+                        <span>{{error}}</span>
+                      {% endfor %}
+                    </div>
+                  {% endif %}
+                {% endif %}
+              </div>
+              <div class="form-group last mb-4">
+                <label for="password1">گذرواژه</label>
+                <!-- <input type="password" class="form-control" id="password"> -->
+                {{form.password1|add_class:"form-control"}}
+                 {% if form.password1 %}
+                  {% if form.password1.errors %}
+                    <div class="error">
+                      {% for error in  form.password1.errors  %}
+                        <span>{{error}}</span>
+                      {% endfor %}
+                    </div>
+                  {% endif %}
+                {% endif %}
+              </div>
+              <div class="form-group last mb-4">
+                <label for="password2">تایید گذرواژه</label>
+                <!-- <input type="password" class="form-control" id="password"> -->
+                {{form.password2|add_class:"form-control"}}
+                 {% if form.password2 %}
+                  {% if form.password2.errors %}
+                    <div class="error">
+                      {% for error in  form.password2.errors  %}
                         <span>{{error}}</span>
                       {% endfor %}
                     </div>
@@ -76,19 +104,9 @@
                 {% endif %}
               </div>
               
-              <div class="d-flex mb-1 align-items-center">
-                  <input type="checkbox" checked="checked">
-                  <div class="control__indicator"></div>
-                  <label class="control control--checkbox mb-0"><span class="caption">مرا به خاطر داشته باش!</span>
-                  </label>
-              </div>
-              <div class="d-flex mb-1 align-items-center">
-                <span class="ml-auto"><a href="{% url 'password_reset' %}" class="forgot-pass myfont">فراموشی گذرواژه</a></span> <br>
-              </div>
-              <div class="d-flex mb-5 align-items-center">
-                <a class="myfont" href="{% url 'register' %}">ثبت نام کنید</a>
-              </div>
-              <input type="submit" value="ورود" class="btn text-white btn-block btn-primary">
+              حسابی دارید؟<a class="myfont" href="{% url 'login' %}">وارد شوید.</a>
+              
+              <input type="submit" value="ثبت نام" class="btn text-white btn-block btn-primary">
 
 
             </form>
