@@ -1,6 +1,6 @@
 {% extends 'blog/base.html' %}
 {% load static %}
-
+{% load comment_tags %}
 {% block title %}
 	| {{article.title}}
 {% endblock %}
@@ -16,20 +16,27 @@
 						<div class="blog-thumb">
 							<img src="{{object.thumbnail.url}}"  alt="">
 						</div>
-						<div class="down-content">
-							<a href="post-details.html"><h4>{{object.title}}</h4></a>
+						<div class="down-content ">
+							<h4 style="direction: rtl;text-align: right;">{{object.title}}</h4>
 							{% if object.is_special %}
 							 	{% if user.authenticated and user.is_special_user or user == object.author or user.is_superuser %}
 							 		<ul class="post-info">
 										<li><a href="#">{{object.jpublish}}</a></li>
+										<span class="text-justify">{{object.description|safe}}</span>
 									</ul>
-									<span class="text-justify">{{object.description|safe}}</span>
 							 	{% else %}
-								 	<p class="post-subtitle text-justify">{{object.description|striptags|truncatewords:30|linebreaks}}
+								 	<span class="post-subtitle text-justify">{{object.description|striptags|truncatewords:30|linebreaks}}
 								 	</p>
 
 							 	<p class="alert alert-warning" >این مقاله ویژه است و برای  مشاهده آن باید <a href="#">اشتراک ویژه </a>تهیه کنید.</p>
 							 	{% endif %}
+							{% else %}
+							<ul class="post-info">
+								<li style="direction: rtl ;text-align: right;"><a href="#">{{object.jpublish}}</a>
+								<span class=" text-justify">{{object.description|safe|linebreaks}}
+								</span>
+								</li>
+							</ul>
 							{% endif %}
 							<div class="post-options">
 								<div class="row">
@@ -52,9 +59,12 @@
 						</div>
 					</div>
 				</div>
+							
 
 			</div>
 		</div>
+							{% render_comments object request %}
+							{% include_bootstrap %}
 	</div>
 
 {% endblock %}

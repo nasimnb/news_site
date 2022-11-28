@@ -45,7 +45,8 @@ INSTALLED_APPS = [
 	'extensions',
 	'widget_tweaks',
 	'crispy_forms',
-	'django_gravatar'
+	'django_gravatar',
+	'comment',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
