@@ -47,6 +47,7 @@ INSTALLED_APPS = [
 	'crispy_forms',
 	'django_gravatar',
 	'comment',
+	'star_ratings'
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
@@ -74,6 +75,7 @@ TEMPLATES = [
 				'django.template.context_processors.request',
 				'django.contrib.auth.context_processors.auth',
 				'django.contrib.messages.context_processors.messages',
+				
 			],
 		},
 	},
@@ -146,3 +148,6 @@ MEDIA_ROOT=BASE_DIR/'media'
 AUTH_USER_MODEL='account.User'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+STAR_RATINGS_STAR_HEIGHT=16

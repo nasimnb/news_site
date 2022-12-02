@@ -1,5 +1,6 @@
 {% extends 'blog/base.html' %}
 {% load static %}
+{% load ratings %}
 {% load comment_tags %}
 {% block title %}
 	| {{article.title}}
@@ -18,12 +19,23 @@
 						</div>
 						<div class="down-content ">
 							<h4 style="direction: rtl;text-align: right;">{{object.title}}</h4>
+				
+							
+						
+							<div style="direction: rtl ;text-align: right;">
+								<time>{{object.jpublish}}</time><br>
+								نویسنده: <a>{{object.author.get_full_name}}</a>
+							</div>
+							<div style="direction: rtl ;text-align: right;">
+								{% ratings object %}
+							</div>
 							{% if object.is_special %}
 							 	{% if user.authenticated and user.is_special_user or user == object.author or user.is_superuser %}
 							 		<ul class="post-info">
-										<li><a href="#">{{object.jpublish}}</a></li>
+										
 										<span class="text-justify">{{object.description|safe}}</span>
 									</ul>
+										
 							 	{% else %}
 								 	<span class="post-subtitle text-justify">{{object.description|striptags|truncatewords:30|linebreaks}}
 								 	</p>
@@ -32,11 +44,12 @@
 							 	{% endif %}
 							{% else %}
 							<ul class="post-info">
-								<li style="direction: rtl ;text-align: right;"><a href="#">{{object.jpublish}}</a>
+								<li style="direction: rtl ;text-align: right;">
 								<span class=" text-justify">{{object.description|safe|linebreaks}}
 								</span>
 								</li>
 							</ul>
+
 							{% endif %}
 							<div class="post-options">
 								<div class="row">

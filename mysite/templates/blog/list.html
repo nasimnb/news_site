@@ -1,6 +1,6 @@
 {% extends 'blog/base.html' %}
 {% load static %}
-
+{% load ratings %}
 {% block title %}
 	| خانه
 {% endblock %}
@@ -26,6 +26,9 @@
 									{% endif %}
 									<p>{{article.description|truncatewords:30|striptags}}</p>
 								</a>
+								<div style="direction: rtl ;text-align: right;">
+								{% ratings article %}
+								</div>
 								<ul class="post-info">
 									<li>
 										<a href="{% url 'blog:author' article.author %}">
