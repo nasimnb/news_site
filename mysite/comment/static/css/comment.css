@@ -216,3 +216,9 @@ input#search-input:focus::placeholder {
 .blockquote-footer {
     padding: 28px 0 15px !important;
 }
+
+.js-comment-content.mb-0 {
+  margin-right: 0;
+  direction: rtl;
+  text-align: right;
+}
