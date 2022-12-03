@@ -29,6 +29,9 @@
 							<div style="direction: rtl ;text-align: right;">
 								{% ratings object %}
 							</div>
+							<div style="direction: rtl ;text-align: right;">
+								بازدیدها :{{object.hits.count}}
+							</div>	
 							{% if object.is_special %}
 							 	{% if user.authenticated and user.is_special_user or user == object.author or user.is_superuser %}
 							 		<ul class="post-info">

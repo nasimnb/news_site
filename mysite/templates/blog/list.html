@@ -41,7 +41,9 @@
 								{% for cat in article.category.all %}
 									<span><a href="">#{{cat.title}}</a></span>
 								{% endfor %}
-
+								<div style="direction: rtl ;text-align: right;">
+								بازدیدها :{{article.hits.count}}
+								</div>
 
 							</div>
 						</div>

@@ -33,7 +33,8 @@ class Category(models.Model):
 
 	objects=CategoryManager()
 
-
+class IPAddress(models.Model):
+	ip_address=models.GenericIPAddressField(verbose_name='آدرس ip')
 
 class Article(models.Model):
 
@@ -59,6 +60,7 @@ class Article(models.Model):
 	is_special=models.BooleanField(default=False,verbose_name="مقاله ویژه")
 	comments = GenericRelation(Comment)
 	status=models.CharField(max_length=1,choices=STATUS_CHOICES,verbose_name="وضعیت")
+	hits=models.ManyToManyField(IPAddress,blank=True,verbose_name='بازدیدها',related_name='hits')
 
 	def __str__(self):
 		return self.title
