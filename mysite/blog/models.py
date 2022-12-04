@@ -60,7 +60,7 @@ class Article(models.Model):
 	is_special=models.BooleanField(default=False,verbose_name="مقاله ویژه")
 	comments = GenericRelation(Comment)
 	status=models.CharField(max_length=1,choices=STATUS_CHOICES,verbose_name="وضعیت")
-	hits=models.ManyToManyField(IPAddress,blank=True,verbose_name='بازدیدها',related_name='hits')
+	hits=models.ManyToManyField(IPAddress,through="ArticleHit",blank=True,verbose_name='بازدیدها',related_name='hits')
 
 	def __str__(self):
 		return self.title
@@ -81,3 +81,9 @@ class Article(models.Model):
 
 	def get_absolute_url(self):
 		return reverse("account:home")
+
+
+class ArticleHit(models.Model):
+	article=models.ForeignKey(Article,on_delete=models.CASCADE)
+	ip_address=models.ForeignKey(IPAddress,on_delete=models.CASCADE)
+	created=models.DateTimeField(auto_now_add=True)
