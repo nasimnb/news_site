@@ -11,6 +11,7 @@ class ArticleList(ListView):
 	paginate_by=2
 
 
+
 class ArticleDetail(DetailView):
 	def get_object(self):
 		slug = self.kwargs.get('slug')
