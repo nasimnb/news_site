@@ -105,30 +105,15 @@ https://templatemo.com/tm-551-stand-blog
 							<div class="row">
 								<div class="col-lg-12">
 									<div class="sidebar-item search">
-										<form id="search_form" name="gs" method="GET" action="#">
-											<input type="text" name="q" class="searchText" placeholder="type to search..." autocomplete="on">
+										<form id="search_form" name="gs"  action="{% url 'blog:search' %}">
+											<input type="text" name="q" class="searchText" placeholder="متن را جستجو کنید..." autocomplete="on">
 										</form>
 									</div>
 								</div>
 								{% popular_articles %}
-								<div class="col-lg-12">
-									<div class="sidebar-item tags">
-										<div class="sidebar-heading">
-											<h2>دسته بندی ها</h2>
-										</div>
-										<div class="content">
-											<ul>
-												<li><a href="#">Lifestyle</a></li>
-												<li><a href="#">Creative</a></li>
-												<li><a href="#">HTML5</a></li>
-												<li><a href="#">Inspiration</a></li>
-												<li><a href="#">Motivation</a></li>
-												<li><a href="#">PSD</a></li>
-												<li><a href="#">Responsive</a></li>
-											</ul>
-										</div>
-									</div>
-								</div>
+								{% hot_articles %}
+
+
 							</div>
 						</div>
 					</div>

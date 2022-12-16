@@ -4,7 +4,7 @@ from account.models import User
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.generic import ListView,DetailView
 from account.mixins import AuthorAccessMixin
-
+from django.db.models import Q
 
 class ArticleList(ListView):
 	queryset=Article.objects.published()
@@ -54,6 +54,19 @@ class Authorlist(ListView):
 		context['author'] = author
 		return context
 
+class Searchlist(ListView):
+	paginate_by=2
+	template_name='blog/search_list.html'
+
+	def get_queryset(self):
+		search=self.request.GET.get('q')
+		
+		return Article.objects.filter(Q(description__icontains=search) | Q(title__icontains=search))
+
+	def get_context_data(self, **kwargs):
+		context = super().get_context_data(**kwargs)
+		context['search'] = self.request.GET.get('q')
+		return context
 
 class ArticlePreview(AuthorAccessMixin,DetailView):
 	def get_object(self):

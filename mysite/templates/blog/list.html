@@ -48,6 +48,8 @@
 							</div>
 						</div>
 					</div>
+				{% empty %}
+					<p class="alert alert-warning" >متاسفانه محتوایی برای نمایش وجود ندارد.</p>
 				{% endfor %}
 			{% if is_paginated %}
 				<div class="col-lg-12">

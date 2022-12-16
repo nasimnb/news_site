@@ -5,6 +5,7 @@ ArticleDetail,
 Categorylist,
 Authorlist,
 ArticlePreview,
+Searchlist
 )
 
 app_name="blog"
@@ -16,5 +17,7 @@ urlpatterns = [
 	path('category/<slug:slug>/page/<int:page>',Categorylist.as_view(),name='category'),
 	path('author/<slug:username>', Authorlist.as_view(), name='author'),
 	path('author/<slug:username>/page/<int:page>',Authorlist.as_view(),name='author'),
+	path('search/', Searchlist.as_view(), name='search'),
+	path('search/page/<int:page>',Searchlist.as_view(),name='search'),
 	path('preview/<int:pk>', ArticlePreview.as_view(), name='preview'),
 ]

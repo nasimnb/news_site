@@ -1,11 +1,11 @@
 <div class="col-lg-12 " style="direction: rtl;text-align: right;">
 	<div class="sidebar-item recent-posts shadow p-3 mb-5 bg-body border rounded">
 		<div  class="sidebar-heading ">
-			<h2>مقالات پربازدید ماه</h2>
+			<h2>{{title}}</h2>
 		</div>
 		<div class="content">
 			<ul>
-				{% for a in popular_articles %}
+				{% for a in articles %}
 					<li>
 						<a href="{% url 'blog:detail' a.slug %}">{{a.title}}
 						</a>

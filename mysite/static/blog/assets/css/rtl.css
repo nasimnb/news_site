@@ -14,3 +14,28 @@ body{
 	font-family: "Sahel";
 	font-size: 16px;
 }
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+
+  font-family: Sahel !important;
+
+}
+
+.sidebar .tags ul li a {
+  color: #151414 !important;
+
+}
+
+.blog-posts .down-content span {
+  font-size: 16px !important;
+  color: #2b2a2a !important;
+  font-family: Sahel !important;
+}
+
+.sidebar .search input {
+  border: 1px solid #d9d9d9 !important;
+}
+
+.sidebar .search input::placeholder {
+  color: #110f0f !important;
+}
