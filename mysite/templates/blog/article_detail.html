@@ -2,6 +2,7 @@
 {% load static %}
 {% load ratings %}
 {% load comment_tags %}
+{% load humanize %}
 {% block title %}
 	| {{article.title}}
 {% endblock %}
@@ -23,7 +24,7 @@
 							
 						
 							<div style="direction: rtl ;text-align: right;">
-								<time>{{object.jpublish}}</time><br>
+								<time>{{object.publish|naturaltime}}</time><br>
 								نویسنده: <a>{{object.author.get_full_name}}</a>
 							</div>
 							<div style="direction: rtl ;text-align: right;">
